@@ -2,6 +2,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealTargets = new Set();
 
+  const startKeepAlive = () => {
+    if (!/^https?:$/.test(window.location.protocol)) {
+      return;
+    }
+
+    const keepAliveUrl = new URL(window.location.pathname, window.location.origin);
+    const ping = () => {
+      const pingUrl = new URL(keepAliveUrl);
+      pingUrl.searchParams.set('keepalive', Date.now().toString());
+
+      fetch(pingUrl.toString(), {
+        method: 'HEAD',
+        cache: 'no-store',
+        credentials: 'same-origin',
+      }).catch(() => {
+        // Ignore keep-alive failures so they do not affect the page experience.
+      });
+    };
+
+    ping();
+    window.setInterval(ping, 10000);
+  };
+
+  startKeepAlive();
+
   const registerGroup = (selector, directionResolver) => {
     document.querySelectorAll(selector).forEach((container) => {
       const children = Array.from(container.children).filter((child) => {
