@@ -48,35 +48,27 @@ Then open the local URL shown in the terminal.
 
 This project should be deployed on Render as a static site.
 
-### Option 1: Deploy from the Render Dashboard
+### Deploy from the Render Dashboard
 
 1. Push this project to GitHub or GitLab.
 2. In Render, click `New` -> `Static Site`.
 3. Connect your repository.
 4. Use these settings:
 
-	- `Branch`: `main` (or your deployment branch)
-	- `Build Command`: `echo "Static site ready"`
-	- `Publish Directory`: `.`
+   - `Branch`: `main` (or your deployment branch)
+   - `Build Command`: `echo "Static site ready"`
+   - `Publish Directory`: `.`
 
 5. Click `Create Static Site`.
 
 Render will deploy the HTML, CSS, and image files directly from the repository root.
-
-### Option 2: Deploy with render.yaml
-
-This repo includes a `render.yaml` file for Render Blueprint deployment.
-
-1. Push the repository with `render.yaml` included.
-2. In Render, click `New` -> `Blueprint`.
-3. Select this repository.
-4. Render will read `render.yaml` and create the static site automatically.
 
 ### Important Notes For Render
 
 - This site does not need `npm install` or any build tool.
 - The publish directory is the project root because `index.html` and the other pages are stored there.
 - Since this is a multi-page static site, no SPA rewrite rule is required.
+- Do not use Render Blueprint for this repo. Use only the `Static Site` option in the Render dashboard.
 
 ## Recommended Workflow
 
