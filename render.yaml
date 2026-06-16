@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: arviona-labs-site
+    runtime: static
+    buildCommand: echo "Static site ready"
+    staticPublishPath: .
+    autoDeployTrigger: commit
